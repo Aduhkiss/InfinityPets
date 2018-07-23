@@ -25,8 +25,6 @@ public class Account {
 	public void setPet(Entity pet, String name) {
 		this.pet = pet;
 		petName = name;
-		
-		pet.setMetadata("InfinityPets", new FixedMetadataValue(PetCore.getInstance(), "LOLIAMAPET"));
 	}
 	
 	public Entity getPet() {

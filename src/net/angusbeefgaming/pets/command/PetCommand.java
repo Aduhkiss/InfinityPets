@@ -16,6 +16,10 @@ public class PetCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String str, String[] args) {
 		if(!(sender instanceof Player)) return false;
 		Player player = (Player) sender;
+		if(!PetManager.petsEnabled()) {
+			player.sendMessage(ChatColor.RED + "Pets are not enabled.");
+			return true;
+		}
 		if(!player.hasPermission(Config.USE_COMMAND)) {
 			player.sendMessage(Config.NO_PERM_COLOR + Config.NO_PERM_MESSAGE);
 			return false;

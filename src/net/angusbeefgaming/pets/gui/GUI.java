@@ -11,17 +11,24 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import net.angusbeefgaming.pets.manager.PetManager;
+
 public class GUI implements Listener {
 	public static Inventory main() {
+		
 		Inventory inv = Bukkit.createInventory(null, 18, "Pets");
 		
 		ItemStack wolf = nameItem(Material.BONE, "Wolf Pet");
 		ItemStack cow = nameItem(Material.LEATHER, "Cow Pet");
 		ItemStack sheep = nameItem(Material.WOOL, "Sheep Pet");
+		ItemStack llama = nameItem(Material.SADDLE, "Llama Pet");
+		ItemStack polarbear = nameItem(Material.SNOW, "Polar Bear Pet");
 		
 		inv.setItem(0, wolf);
 		inv.setItem(1, cow);
 		inv.setItem(2, sheep);
+		inv.setItem(3, llama);
+		inv.setItem(4, polarbear);
 		
 		return inv;
 	}
@@ -52,6 +59,18 @@ public class GUI implements Listener {
 		}
 		if(item.getItemMeta().getDisplayName().equals("Sheep Pet")) {
 			Bukkit.dispatchCommand(player, "pet Sheep");
+			e.setCancelled(true);
+			player.closeInventory();
+			return;
+		}
+		if(item.getItemMeta().getDisplayName().equals("Llama Pet")) {
+			Bukkit.dispatchCommand(player, "pet Llama");
+			e.setCancelled(true);
+			player.closeInventory();
+			return;
+		}
+		if(item.getItemMeta().getDisplayName().equals("Polar Bear Pet")) {
+			Bukkit.dispatchCommand(player, "pet PolarBear");
 			e.setCancelled(true);
 			player.closeInventory();
 			return;

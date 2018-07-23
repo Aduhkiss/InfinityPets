@@ -3,6 +3,7 @@ package net.angusbeefgaming.pets.manager;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_12_R1.entity.CraftEntity;
 import org.bukkit.entity.Cow;
@@ -13,16 +14,20 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Wolf;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.angusbeefgaming.pets.PetCore;
 import net.angusbeefgaming.pets.pets.Pets;
+import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_12_R1.EntityInsentient;
 import net.minecraft.server.v1_12_R1.PathEntity;
 
 public class PetManager {
 	
 	public static Map<Player, Boolean> spawnedPets = new HashMap<Player, Boolean>();
+	
+	private static boolean petsEnabled = true;
 	
 	public static void enablePet(Player pl, Pets pet) {
 		if(spawnedPets.get(pl) == null) {
@@ -34,6 +39,7 @@ public class PetManager {
 	        petObj.setCustomName(pl.getDisplayName() + "'s Wolf Pet");
 	        spawnedPets.put(pl, true);
 	        follow(pl, petObj);
+	        petObj.setMetadata("InfinityPets", new FixedMetadataValue(PetCore.getInstance(), "LOLIAMAPET"));
 	        PetCore.accounts.get(pl).setPet(petObj, pl.getDisplayName() + "'s Wolf Pet");
 	        return;
 		}
@@ -43,6 +49,7 @@ public class PetManager {
 	        petObj.setCustomName(pl.getDisplayName() + "'s Cow Pet");
 	        spawnedPets.put(pl, true);
 	        follow(pl, petObj);
+	        petObj.setMetadata("InfinityPets", new FixedMetadataValue(PetCore.getInstance(), "LOLIAMAPET"));
 	        PetCore.accounts.get(pl).setPet(petObj, pl.getDisplayName() + "'s Cow Pet");
 	        return;
 		}
@@ -52,6 +59,7 @@ public class PetManager {
 	        petObj.setCustomName(pl.getDisplayName() + "'s Sheep Pet");
 	        spawnedPets.put(pl, true);
 	        follow(pl, petObj);
+	        petObj.setMetadata("InfinityPets", new FixedMetadataValue(PetCore.getInstance(), "LOLIAMAPET"));
 	        PetCore.accounts.get(pl).setPet(petObj, pl.getDisplayName() + "'s Sheep Pet");
 	        return;
 		}
@@ -67,6 +75,8 @@ public class PetManager {
 	        	PetCore.accounts.get(pl).setPet(petObj, pl.getDisplayName() + "'s Llama Pet");
 	        }
 	        spawnedPets.put(pl, true);
+	        
+	        petObj.setMetadata("InfinityPets", new FixedMetadataValue(PetCore.getInstance(), "LOLIAMAPET"));
 	        follow(pl, petObj);
 	        return;
 		}
@@ -82,6 +92,7 @@ public class PetManager {
 	        	PetCore.accounts.get(pl).setPet(petObj, pl.getDisplayName() + "'s Polar Bear Pet");
 	        }
 	        spawnedPets.put(pl, true);
+	        petObj.setMetadata("InfinityPets", new FixedMetadataValue(PetCore.getInstance(), "LOLIAMAPET"));
 	        follow(pl, petObj);
 	        return;
 		}
@@ -94,6 +105,24 @@ public class PetManager {
 	
 	public static void namePet(Player player, String name) {
 		PetCore.accounts.get(player).setPetName(name);
+	}
+	
+	public static void enablePets(Player pl) {
+		for(Player play : Bukkit.getOnlinePlayers()) {
+			play.sendMessage(ChatColor.GREEN + "Pets have been Enabled.");
+		}
+		petsEnabled = true;
+	}
+	
+	public static void disablePets(Player pl) {
+		for(Player play : Bukkit.getOnlinePlayers()) {
+			play.sendMessage(ChatColor.GREEN + "Pets have been Disabled.");
+		}
+		petsEnabled = false;
+	}
+	
+	public static boolean petsEnabled() {
+		return petsEnabled;
 	}
 	
     public static void follow(final Player player, final Entity pet) {
@@ -114,6 +143,12 @@ public class PetManager {
                 this.cancel();
                 pet.remove();
                 return;
+            }
+            
+            if(!petsEnabled) {
+            	this.cancel();
+            	pet.remove();
+            	return;
             }
            
             Object petObject = ((CraftEntity) pet).getHandle();

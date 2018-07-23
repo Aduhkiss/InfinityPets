@@ -14,6 +14,7 @@ import net.angusbeefgaming.pets.command.PetCommand;
 import net.angusbeefgaming.pets.command.PetMenuCommand;
 import net.angusbeefgaming.pets.command.RemovePetCommand;
 import net.angusbeefgaming.pets.gui.GUI;
+import net.angusbeefgaming.pets.listener.DamageHandler;
 import net.angusbeefgaming.pets.player.Account;
 
 public class PetCore extends JavaPlugin implements Listener {
@@ -38,6 +39,7 @@ public class PetCore extends JavaPlugin implements Listener {
 		
 		getServer().getPluginManager().registerEvents(this, this);
 		getServer().getPluginManager().registerEvents(new GUI(), this);
+		getServer().getPluginManager().registerEvents(new DamageHandler(), this);
 	}
 	
 	@Override
