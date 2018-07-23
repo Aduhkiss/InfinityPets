@@ -1,0 +1,13 @@
+name: InfinityPets
+main: net.angusbeefgaming.pets.PetCore
+version: 1.0
+author: ["Atticus Zambrana"]
+commands: 
+  pets:
+    description: Pet GUI
+  pet:
+    description: Core Pet Command
+  removepet:
+    description: Remove pet
+  namepet:
+    description: Name pet
