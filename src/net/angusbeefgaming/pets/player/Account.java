@@ -2,6 +2,9 @@ package net.angusbeefgaming.pets.player;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.FixedMetadataValue;
+
+import net.angusbeefgaming.pets.PetCore;
 
 public class Account {
 	
@@ -22,6 +25,8 @@ public class Account {
 	public void setPet(Entity pet, String name) {
 		this.pet = pet;
 		petName = name;
+		
+		pet.setMetadata("InfinityPets", new FixedMetadataValue(PetCore.getInstance(), "LOLIAMAPET"));
 	}
 	
 	public Entity getPet() {
