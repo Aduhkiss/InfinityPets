@@ -36,6 +36,20 @@ public class NamePetCommand implements CommandExecutor {
         
         String petName = message.substring(0, message.length() - 1);
 		
+        if(petName.equals("jeb_")) {
+        	if(!player.hasPermission(Config.SHEEP_RAINBOW)) {
+        		player.sendMessage(ChatColor.RED + "You have not purchased the Rainbow Package Yet!");
+        		return false;
+        	}
+        }
+        
+        if(petName.equals("Dinnerbone")) {
+        	if(!player.hasPermission(Config.PET_UPSIDEDOWN)) {
+        		player.sendMessage(ChatColor.RED + "You have not purchased the Upsidedown Package Yet!");
+        		return false;
+        	}
+        }
+        
 		PetManager.namePet(player, petName);
 		player.sendMessage(ChatColor.GREEN + "You have named your pet: " + petName);
 		return true;

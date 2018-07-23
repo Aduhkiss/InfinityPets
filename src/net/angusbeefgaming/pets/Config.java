@@ -14,6 +14,11 @@ public class Config {
 	// Pet not purchased message
 	public static final String PET_NOT_BOUGHT = "You have not purchased that pet!";
 	
+	// Rainbow feature (FOR SHEEP PETS)
+	public static final String SHEEP_RAINBOW = "infinitypets.rainbow";
+	
+	// Upsidedown Feature
+	public static final String PET_UPSIDEDOWN = "infinitypets.upsidedown";
 	
 	// Pet Permissions
 	// Main Command Access
