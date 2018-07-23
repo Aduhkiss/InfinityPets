@@ -109,14 +109,14 @@ public class PetManager {
 	
 	public static void enablePets(Player pl) {
 		for(Player play : Bukkit.getOnlinePlayers()) {
-			play.sendMessage(ChatColor.GREEN + "Pets have been Enabled.");
+			play.sendMessage(ChatColor.GREEN + "Pets have been Enabled by " + pl.getDisplayName());
 		}
 		petsEnabled = true;
 	}
 	
 	public static void disablePets(Player pl) {
 		for(Player play : Bukkit.getOnlinePlayers()) {
-			play.sendMessage(ChatColor.GREEN + "Pets have been Disabled.");
+			play.sendMessage(ChatColor.GREEN + "Pets have been Disabled by " + pl.getDisplayName());
 		}
 		petsEnabled = false;
 	}

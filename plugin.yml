@@ -3,6 +3,8 @@ main: net.angusbeefgaming.pets.PetCore
 version: 1.0
 author: ["Atticus Zambrana"]
 commands: 
+  togglepets:
+    description: Toggle Pets
   pets:
     description: Pet GUI
   pet:

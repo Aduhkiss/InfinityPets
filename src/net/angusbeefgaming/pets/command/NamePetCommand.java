@@ -37,7 +37,7 @@ public class NamePetCommand implements CommandExecutor {
         String petName = message.substring(0, message.length() - 1);
 		
 		PetManager.namePet(player, petName);
-		player.sendMessage(ChatColor.GREEN + "You have named your pet " + petName);
+		player.sendMessage(ChatColor.GREEN + "You have named your pet: " + petName);
 		return true;
 	}
 }

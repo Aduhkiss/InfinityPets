@@ -19,6 +19,9 @@ public class Config {
 	// Main Command Access
 	public static final String USE_COMMAND = "infinitypets.use";
 	
+	// Admin Commands
+	public static final String ADMIN_COMMAND = "infinitypets.admin";
+	
 	// Pet Permissions
 	public static final String PET_WOLF = "infinitypets.pet.wolf";
 	public static final String PET_COW = "infinitypets.pet.cow";
