@@ -9,7 +9,7 @@ import org.bukkit.craftbukkit.v1_12_R1.entity.CraftEntity;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Llama;
-import org.bukkit.entity.NPC;
+import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Sheep;
@@ -96,6 +96,16 @@ public class PetManager {
 	        follow(pl, petObj);
 	        return;
 		}
+		if(pet == Pets.PARROT) {
+	        Parrot petObj = pl.getWorld().spawn(pl.getLocation().add(0,1,0), Parrot.class);
+	        petObj.setCustomNameVisible(true);
+	        petObj.setCustomName(pl.getDisplayName() + "'s Parrot Pet");
+	        spawnedPets.put(pl, true);
+	        follow(pl, petObj);
+	        petObj.setMetadata("InfinityPets", new FixedMetadataValue(PetCore.getInstance(), "LOLIAMAPET"));
+	        PetCore.accounts.get(pl).setPet(petObj, pl.getDisplayName() + "'s Parrot Pet");
+	        return;
+		}
 	}
 	
 	public static void removePet(Player player, Entity pet) {
@@ -160,7 +170,16 @@ public class PetManager {
              
                 path = ((EntityInsentient)petObject).getNavigation().a(loc.getX() + 1, loc.getY(), loc.getZ() +1);
                
-                int distance = (int) loc.distance(pet.getLocation());
+                int distance = 0;
+                try {
+                	distance = (int) loc.distance(pet.getLocation());
+                }
+                catch(IllegalArgumentException e) {
+                	pet.remove();
+                	removePet(player, PetCore.accounts.get(player).getPet());
+                	player.sendMessage(ChatColor.GREEN + "Your pet was removed since you switched worlds!");
+                	return;
+                }
                 
                 if(path != null && distance > 5) {
                     ((EntityInsentient)petObject).getNavigation().a(path, 1.0D);

@@ -95,6 +95,20 @@ public class PetCommand implements CommandExecutor {
 			return true;
 		}
 		
+		if(args[0].equalsIgnoreCase("parrot")) {
+			if(!player.hasPermission(Config.PET_PARROT)) {
+				player.sendMessage(ChatColor.RED + Config.PET_NOT_BOUGHT);
+				return false;
+			}
+			if(PetManager.hasPetSpawned(player)) {
+				player.sendMessage(ChatColor.RED + "You already have a Pet Spawned!");
+				return false;
+			}
+			PetManager.enablePet(player, Pets.PARROT);
+			player.sendMessage(ChatColor.GREEN + "You have enabled Parrot Pet!");
+			return true;
+		}
+		
 		else {
 			player.sendMessage(ChatColor.RED + Config.PET_NOT_FOUND);
 			return false;

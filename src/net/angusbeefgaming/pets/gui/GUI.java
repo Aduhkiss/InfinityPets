@@ -23,12 +23,14 @@ public class GUI implements Listener {
 		ItemStack sheep = nameItem(Material.WOOL, "Sheep Pet");
 		ItemStack llama = nameItem(Material.SADDLE, "Llama Pet");
 		ItemStack polarbear = nameItem(Material.SNOW, "Polar Bear Pet");
+		ItemStack parrot = nameItem(Material.FEATHER, "Parrot Pet");
 		
 		inv.setItem(0, wolf);
 		inv.setItem(1, cow);
 		inv.setItem(2, sheep);
 		inv.setItem(3, llama);
 		inv.setItem(4, polarbear);
+		inv.setItem(5, parrot);
 		
 		return inv;
 	}
@@ -37,6 +39,13 @@ public class GUI implements Listener {
 	public void click(InventoryClickEvent e) {
 		Inventory inv = e.getClickedInventory();
 		Player player = (Player) e.getWhoClicked();
+		
+		if(inv == null) {
+			return;
+		}
+		
+		if(!inv.getTitle().equals("Pets")) return;
+		
 		ItemStack item;
 		try {
 			item = e.getCurrentItem();
@@ -44,6 +53,8 @@ public class GUI implements Listener {
 		catch(NullPointerException ex) {
 			return;
 		}
+		
+		if(item == null) return;
 		
 		if(item.getItemMeta().getDisplayName().equals("Wolf Pet")) {
 			Bukkit.dispatchCommand(player, "pet Wolf");
@@ -71,6 +82,12 @@ public class GUI implements Listener {
 		}
 		if(item.getItemMeta().getDisplayName().equals("Polar Bear Pet")) {
 			Bukkit.dispatchCommand(player, "pet PolarBear");
+			e.setCancelled(true);
+			player.closeInventory();
+			return;
+		}
+		if(item.getItemMeta().getDisplayName().equals("Parrot Pet")) {
+			Bukkit.dispatchCommand(player, "pet Parrot");
 			e.setCancelled(true);
 			player.closeInventory();
 			return;
