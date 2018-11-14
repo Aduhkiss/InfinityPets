@@ -5,6 +5,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.djrapitops.antimatter.filters.AntiIP;
+import com.djrapitops.antimatter.filters.AntiReplacer;
+
 import net.angusbeefgaming.pets.Config;
 import net.angusbeefgaming.pets.manager.PetManager;
 import net.md_5.bungee.api.ChatColor;
@@ -35,23 +38,35 @@ public class NamePetCommand implements CommandExecutor {
         }
         
         String petName = message.substring(0, message.length() - 1);
+        
+        // First check for any kind of ip's or addresses, if so, dont allow it
+        
+        if(!AntiIP.pass(petName)) {
+        	player.sendMessage(ChatColor.RED + "Please do not try to advertise in your pet's name!");
+        	return false;
+        }
+        
+        // Then we will check for any swear words based on the api's default rules
+        AntiReplacer replacer = new AntiReplacer();
+        
+        String filteredName = replacer.parseMessage(petName);
 		
-        if(petName.equals("jeb_")) {
+        if(filteredName.equals("jeb_")) {
         	if(!player.hasPermission(Config.SHEEP_RAINBOW)) {
         		player.sendMessage(ChatColor.RED + "You have not purchased the Rainbow Package Yet!");
         		return false;
         	}
         }
         
-        if(petName.equals("Dinnerbone")) {
+        if(filteredName.equals("Dinnerbone")) {
         	if(!player.hasPermission(Config.PET_UPSIDEDOWN)) {
         		player.sendMessage(ChatColor.RED + "You have not purchased the Upsidedown Package Yet!");
         		return false;
         	}
         }
         
-		PetManager.namePet(player, petName);
-		player.sendMessage(ChatColor.GREEN + "You have named your pet: " + petName);
+		PetManager.namePet(player, filteredName);
+		player.sendMessage(ChatColor.GREEN + "You have named your pet: " + filteredName);
 		return true;
 	}
 }
