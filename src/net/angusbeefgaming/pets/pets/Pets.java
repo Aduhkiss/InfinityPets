@@ -6,5 +6,6 @@ public enum Pets {
 	SHEEP,
 	LLAMA,
 	POLAR_BEAR,
-	PARROT
+	PARROT,
+	VILLAGER
 }

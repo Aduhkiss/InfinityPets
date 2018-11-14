@@ -24,6 +24,7 @@ public class GUI implements Listener {
 		ItemStack llama = nameItem(Material.SADDLE, "Llama Pet");
 		ItemStack polarbear = nameItem(Material.SNOW, "Polar Bear Pet");
 		ItemStack parrot = nameItem(Material.FEATHER, "Parrot Pet");
+		ItemStack villager = nameItem(Material.EMERALD, "Villager Pet");
 		
 		inv.setItem(0, wolf);
 		inv.setItem(1, cow);
@@ -31,6 +32,7 @@ public class GUI implements Listener {
 		inv.setItem(3, llama);
 		inv.setItem(4, polarbear);
 		inv.setItem(5, parrot);
+		inv.setItem(6, villager);
 		
 		return inv;
 	}
@@ -88,6 +90,12 @@ public class GUI implements Listener {
 		}
 		if(item.getItemMeta().getDisplayName().equals("Parrot Pet")) {
 			Bukkit.dispatchCommand(player, "pet Parrot");
+			e.setCancelled(true);
+			player.closeInventory();
+			return;
+		}
+		if(item.getItemMeta().getDisplayName().equals("Villager Pet")) {
+			Bukkit.dispatchCommand(player, "pet Villager");
 			e.setCancelled(true);
 			player.closeInventory();
 			return;

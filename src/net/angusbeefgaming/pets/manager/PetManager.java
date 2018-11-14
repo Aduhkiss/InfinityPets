@@ -13,6 +13,7 @@ import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Villager;
 import org.bukkit.entity.Wolf;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -104,6 +105,16 @@ public class PetManager {
 	        follow(pl, petObj);
 	        petObj.setMetadata("InfinityPets", new FixedMetadataValue(PetCore.getInstance(), "LOLIAMAPET"));
 	        PetCore.accounts.get(pl).setPet(petObj, pl.getDisplayName() + "'s Parrot Pet");
+	        return;
+		}
+		if(pet == Pets.VILLAGER) {
+	        Villager petObj = pl.getWorld().spawn(pl.getLocation().add(0,1,0), Villager.class);
+	        petObj.setCustomNameVisible(true);
+	        petObj.setCustomName(pl.getDisplayName() + "'s Villager Pet");
+	        spawnedPets.put(pl, true);
+	        follow(pl, petObj);
+	        petObj.setMetadata("InfinityPets", new FixedMetadataValue(PetCore.getInstance(), "LOLIAMAPET"));
+	        PetCore.accounts.get(pl).setPet(petObj, pl.getDisplayName() + "'s Villager Pet");
 	        return;
 		}
 	}

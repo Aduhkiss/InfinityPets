@@ -34,4 +34,5 @@ public class Config {
 	public static final String PET_LLAMA = "infinitypets.pet.llama";
 	public static final String PET_POLAR_BEAR = "infinitypets.pet.polarbear";
 	public static final String PET_PARROT = "infinitypets.pet.parrot";
+	public static final String PET_VILLAGER = "infinitypets.pet.villager";
 }

@@ -109,6 +109,20 @@ public class PetCommand implements CommandExecutor {
 			return true;
 		}
 		
+		if(args[0].equalsIgnoreCase("villager")) {
+			if(!player.hasPermission(Config.PET_VILLAGER)) {
+				player.sendMessage(ChatColor.RED + Config.PET_NOT_BOUGHT);
+				return false;
+			}
+			if(PetManager.hasPetSpawned(player)) {
+				player.sendMessage(ChatColor.RED + "You already have a Pet Spawned!");
+				return false;
+			}
+			PetManager.enablePet(player, Pets.VILLAGER);
+			player.sendMessage(ChatColor.GREEN + "You have enabled Villager Pet!");
+			return true;
+		}
+		
 		else {
 			player.sendMessage(ChatColor.RED + Config.PET_NOT_FOUND);
 			return false;
